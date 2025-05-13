@@ -8,6 +8,9 @@
 .globl __pbl_board_entry
 
 .section .text_head_prologue_common, "x"
+// #if defined(CONFIG_LINUX_KERNEL_IMAGE_HEADER)
+#include <asm/linux-kernel-header.h>
+// #elif defined(CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK)
 ENTRY(__barebox_arm64_head)
 	nop
 	adr x9, __pbl_board_stack_top
@@ -23,7 +26,7 @@ ENTRY(__barebox_arm64_head)
 	nop
 #endif
 	b __pbl_board_entry
-	.org 0x20
+	/* .org 0x20*/
 	.asciz "barebox"
 	.word 0xffffffff
 	.word _barebox_image_size	/* image size to copy */

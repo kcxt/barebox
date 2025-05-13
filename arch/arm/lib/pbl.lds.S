@@ -58,6 +58,34 @@ SECTIONS
 	/* Discard unwind if enable in barebox */
 	/DISCARD/ : { *(.ARM.ex*) }
 
+
+#define DATA_LE32(data) ((data) & 0xffffffff)
+
+#define DEFINE_IMAGE_LE64(sym, data)				\
+	sym##_lo32 = DATA_LE32((data) & 0xffffffff);		\
+	sym##_hi32 = DATA_LE32((data) >> 32)
+
+#define __HEAD_FLAG_BE		0
+#define __HEAD_FLAG_PAGE_SIZE	1 /* 4K hard-coded */
+#define __HEAD_FLAG_PHYS_BASE	1
+#define __HEAD_FLAGS		((__HEAD_FLAG_BE << 0) |	\
+				 (__HEAD_FLAG_PAGE_SIZE << 1) |	\
+				 (__HEAD_FLAG_PHYS_BASE << 3))
+
+#define __MAX(a, b)		(((a) > (b)) ? (a) : (b))
+#define __CODE_DATA_SIZE	(__bss_start - _stext)
+#define __BSS_SIZE		(__bss_stop - __bss_start)
+#ifdef CONFIG_INIT_SP_RELATIVE
+#define __MAX_EXTRA_RAM_USAGE	__MAX(__BSS_SIZE, CONFIG_SYS_INIT_SP_BSS_OFFSET)
+#else
+#define __MAX_EXTRA_RAM_USAGE	__BSS_SIZE
+#endif
+#define __MEM_USAGE		(__CODE_DATA_SIZE + __MAX_EXTRA_RAM_USAGE)
+
+DEFINE_IMAGE_LE64(_kernel_size_le, __MEM_USAGE);
+DEFINE_IMAGE_LE64(_kernel_offset_le, 0xA0000000);
+DEFINE_IMAGE_LE64(_kernel_flags_le, __HEAD_FLAGS);
+
 	BAREBOX_BARE_INIT_SIZE
 	BAREBOX_PBL_SIZE
 
