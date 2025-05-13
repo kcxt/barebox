@@ -201,6 +201,17 @@ config ARCH_OMAP_MULTI
 	select HAS_DEBUG_LL
 	select GPIOLIB
 
+config ARCH_QUALCOMM
+	bool "Qualcomm"
+	depends on ARCH_MULTIARCH
+	select COMMON_CLK
+	select COMMON_CLK_OF_PROVIDER
+	select GPIOLIB
+	select PINCTRL
+	select PINCTRL_ROCKCHIP
+	select HAS_DEBUG_LL
+	imply GPIO_ROCKCHIP
+
 config ARCH_ROCKCHIP
 	bool "Rockchip RX3xxx"
 	depends on ARCH_MULTIARCH

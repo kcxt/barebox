@@ -172,6 +172,7 @@ include $(srctree)/images/Makefile.malta
 include $(srctree)/images/Makefile.mvebu
 include $(srctree)/images/Makefile.mxs
 include $(srctree)/images/Makefile.omap3
+include $(srctree)/images/Makefile.qualcomm
 include $(srctree)/images/Makefile.rockchip
 include $(srctree)/images/Makefile.socfpga
 include $(srctree)/images/Makefile.stm32mp

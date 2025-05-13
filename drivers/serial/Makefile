@@ -22,6 +22,7 @@ obj-$(CONFIG_DRIVER_SERIAL_LPUART)		+= serial_lpuart.o
 obj-$(CONFIG_DRIVER_SERIAL_LPUART32)		+= serial_lpuart32.o
 obj-$(CONFIG_VIRTIO_CONSOLE)			+= virtio_console.o
 obj-$(CONFIG_SERIAL_SIFIVE)			+= serial_sifive.o
+obj-$(CONFIG_ARCH_QUALCOMM)			+= serial_qcom_geni.o
 obj-$(CONFIG_SERIAL_SBI)			+= serial_sbi.o
 obj-$(CONFIG_SOC_LITEX)				+= serial_litex.o
 obj-$(CONFIG_SERIAL_SEMIHOSTING)		+= serial_semihosting.o

@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-only
+#
+# barebox image generation Makefile for Qualcomm images
+#
+
+pblb-$(CONFIG_ARCH_QUALCOMM) += start_qualcomm
+FILE_barebox-qualcomm.img = start_qualcomm.pblb
+image-$(CONFIG_ARCH_QUALCOMM) += barebox-qualcomm.img

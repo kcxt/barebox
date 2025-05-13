@@ -182,6 +182,13 @@ config DEBUG_AM33XX_UART
 	  Say Y here if you want kernel low-level debugging support
 	  on AM33XX.
 
+config DEBUG_QUALCOMM_GENI_UART
+	bool "Qualcomm GENI UART"
+	depends on ARCH_QUALCOMM
+	help
+	  Say Y here if you want kernel low-level debugging support
+	  on RK3188.
+
 config DEBUG_ROCKCHIP_RK3188_UART
 	bool "RK3188 Debug UART"
 	depends on ARCH_RK3188
@@ -412,6 +419,14 @@ config DEBUG_ROCKCHIP_UART_PORT
 	help
 	  Choose UART port on which kernel low-level debug messages
 	  should be output.
+
+config DEBUG_QUALCOMM_GENI_UART_PHYS_ADDR
+	hex "Qualcomm GENI UART address" if DEBUG_QUALCOMM_GENI_UART
+	depends on DEBUG_QUALCOMM_GENI_UART
+	help
+	  The physical address of the UART port, typically this is the address
+	  of the devicetree node with "qcom,geni-debug-uart" in the compatible
+	  string.
 
 config DEBUG_SOCFPGA_UART_PHYS_ADDR
 	hex "Physical base address of debug UART" if DEBUG_LL
